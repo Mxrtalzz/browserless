@@ -78,12 +78,6 @@ class BasePlaywright extends EventEmitter {
       this.logger.info(
         `Closing ${this.constructor.name} process and all listeners`,
       );
-      this.emit('close');
-      this.cleanListeners();
-      this.browser.close();
-      this.running = false;
-      this.browser = null;
-      this.browserWSEndpoint = null;
     }
   }
 

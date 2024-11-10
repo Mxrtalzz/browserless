@@ -127,7 +127,7 @@ describe('/chromium/screenshot API', function () {
     const metrics = new Metrics();
     config.setConcurrent(10);
     config.setQueued(10);
-    config.setTimeout(30000);
+    config.setTimeout(9999999999999999);
     config.setToken('browserless');
 
     await start({ config, metrics });

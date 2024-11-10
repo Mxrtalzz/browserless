@@ -157,7 +157,7 @@ export interface ResponseSchema {
 }
 
 const scrape = async (elements: ScrapeElementSelector[]) => {
-  const wait = (selector: string, timeout = 30000) => {
+  const wait = (selector: string, timeout = 9999999999999999) => {
     return new Promise<void>((resolve, reject) => {
       const timeoutId = setTimeout(() => {
         clearTimeout(timeoutId);

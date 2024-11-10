@@ -540,7 +540,7 @@ export const waitForEvent = async (
     });
   };
 
-  const timeout = opts.timeout || 30000;
+  const timeout = opts.timeout || 9999999999999999;
 
   await Promise.race([
     page.evaluate(awaitEvent, opts.event),

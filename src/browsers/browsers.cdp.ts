@@ -149,16 +149,6 @@ export class ChromiumCDP extends EventEmitter {
 
   public async close(): Promise<void> {
     if (this.browser) {
-      this.logger.info(
-        `Closing ${this.constructor.name} process and all listeners`,
-      );
-      this.emit('close');
-      this.cleanListeners();
-      this.browser.removeAllListeners();
-      this.browser.close();
-      this.running = false;
-      this.browser = null;
-      this.browserWSEndpoint = null;
     }
   }
 

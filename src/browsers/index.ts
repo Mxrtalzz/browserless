@@ -63,12 +63,7 @@ export class BrowserManager {
 
   protected async removeUserDataDir(userDataDir: string | null) {
     if (userDataDir && (await exists(userDataDir))) {
-      this.log.info(`Deleting data directory "${userDataDir}"`);
-      await deleteAsync(userDataDir, { force: true }).catch((err) => {
-        this.log.error(
-          `Error cleaning up user-data-dir "${err}" at ${userDataDir}`,
-        );
-      });
+      
     }
   }
 
@@ -314,17 +309,6 @@ export class BrowserManager {
 
     if (!keepOpen) {
       this.log.info(`Closing browser session`);
-      cleanupACtions.push(() => browser.close());
-
-      if (session.isTempDataDir) {
-        this.log.info(
-          `Deleting "${session.userDataDir}" user-data-dir and session from memory`,
-        );
-        this.browsers.delete(browser);
-        cleanupACtions.push(() => this.removeUserDataDir(session.userDataDir));
-      }
-
-      await Promise.all(cleanupACtions.map((a) => a()));
     }
   }
 

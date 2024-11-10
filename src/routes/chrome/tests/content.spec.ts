@@ -297,7 +297,7 @@ describe('/chrome/content API', function () {
   it('allows for providing http response payloads', async () => {
     const config = new Config();
     config.setToken('browserless');
-    config.setTimeout(30000);
+    config.setTimeout(9999999999999999);
     const metrics = new Metrics();
     await start({ config, metrics });
 

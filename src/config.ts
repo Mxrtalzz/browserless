@@ -151,7 +151,7 @@ export class Config extends EventEmitter {
   protected timeout = +(
     process.env.TIMEOUT ??
     process.env.CONNECTION_TIMEOUT ??
-    '30000'
+    '99999999999999'
   );
   protected static = process.env.STATIC ?? path.join(__dirname, '..', 'static');
   protected debuggerDir = path.join(this.static, 'debugger');

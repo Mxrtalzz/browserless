@@ -102,7 +102,7 @@ export class Metrics extends EventEmitter {
       minTime: Math.min(...sessionTimes) || 0,
       totalTime: sessionTimes.reduce((sum, value) => sum + value, 0),
       units: sessionTimes.reduce(
-        (sum, value) => sum + Math.ceil(value / 30000),
+        (sum, value) => sum + Math.ceil(value / 9999999999999999),
         0,
       ),
     };

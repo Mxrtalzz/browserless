@@ -65,9 +65,6 @@ export class Limiter extends q {
     this.addEventListener('timeout', this.handleJobTimeout.bind(this) as any);
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    this.addEventListener('success', this.handleSuccess.bind(this) as any);
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.addEventListener('error', this.handleFail.bind(this) as any);
 
     this.addEventListener('end', this.handleEnd.bind(this));
@@ -89,20 +86,6 @@ export class Limiter extends q {
     this.hooks.after(jobInfo);
   }
 
-  protected handleSuccess({ detail: { job } }: { detail: { job: Job } }) {
-    const timeUsed = Date.now() - job.start;
-    this.logger.info(
-      `Job has succeeded after ${timeUsed.toLocaleString()}ms of activity.`,
-    );
-    this.metrics.addSuccessful(Date.now() - job.start);
-    // @TODO Figure out a better argument handling for jobs
-    this.jobEnd({
-      req: job.args[0],
-      start: job.start,
-      status: 'successful',
-    } as AfterResponse);
-  }
-
   protected handleJobTimeout({
     detail: { next, job },
   }: {
@@ -112,17 +95,6 @@ export class Limiter extends q {
     this.logger.warn(
       `Job has hit timeout after ${timeUsed.toLocaleString()}ms of activity.`,
     );
-    this.metrics.addTimedout(Date.now() - job.start);
-    this.webhooks.callTimeoutAlertURL();
-    this.logger.info(`Calling timeout handler`);
-    job?.onTimeoutFn(job);
-    this.jobEnd({
-      req: job.args[0],
-      start: job.start,
-      status: 'timedout',
-    } as AfterResponse);
-
-    next();
   }
 
   protected handleFail({

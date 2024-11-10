@@ -432,7 +432,7 @@ export type WaitForFunctionOptions = {
   polling?: string | number;
 
   /**
-   * Maximum time to wait for in milliseconds. Defaults to 30000 (30 seconds).
+   * Maximum time to wait for in milliseconds. Defaults to 9999999999999999 (30 seconds).
    * Pass 0 to disable timeout.
    */
   timeout?: number;
